@@ -1,0 +1,26 @@
+# Core scientific stack
+numpy>=1.26
+pandas>=2.0
+scikit-learn>=1.3
+scipy>=1.11
+joblib>=1.3
+pyyaml>=6.0
+
+# Deep learning
+torch>=2.1
+
+# Homomorphic encryption (Paillier, additively homomorphic)
+phe>=1.5
+# gmpy2 is effectively required: phe auto-detects it and it gives ~10x on the
+# modular exponentiation that dominates encryption.
+gmpy2>=2.1
+
+# Client signing keys (Ed25519) binding each submission to its ciphertext
+cryptography>=42.0
+
+# Plotting
+matplotlib>=3.7
+seaborn>=0.12
+
+# Tests
+pytest>=7.4

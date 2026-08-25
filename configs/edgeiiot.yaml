@@ -1,0 +1,170 @@
+seed: 42
+seeds:
+- 42
+- 123
+- 2024
+- 7
+- 2025
+device: auto
+paths:
+  results_dir: results/edgeiiot
+  csv_dir: results/edgeiiot/csv
+  figures_dir: results/edgeiiot/figures
+  models_dir: results/edgeiiot/models
+  logs_dir: results/edgeiiot/logs
+data:
+  name: edgeiiot
+  source: npz
+  npz_path: D:/ChiVan/Dataset/HE-FedSec/data_processed/edgeiiot.npz
+  processed_dir: data/processed_npz
+  max_rows_per_class: 0
+  test_size: 0.15
+  val_size: 0.15
+  scaler: standard
+model:
+  type: mlp
+  hidden_sizes:
+  - 256
+  - 128
+  - 64
+  dropout: 0.2
+  activation: relu
+training:
+  class_weighting: effective_number
+  cb_beta: 0.9999
+  balanced_sampler: true
+  label_smoothing: 0.02
+federated:
+  num_clients: 10
+  rounds: 30
+  local_epochs: 2
+  local_batch_size: 256
+  client_lr: 0.002
+  optimizer: adam
+  partition: dirichlet
+  dirichlet_alpha: 0.5
+  fraction_fit: 1.0
+  grad_clip_norm: 1.0
+  max_update_norm: 10.0
+model_selection:
+  enabled: true
+  metric: macro_f1
+crypto:
+  enabled: true
+  backend: paillier_packed
+  key_size: 2048
+  value_bits: 20
+  headroom_bits: 20
+  weight_scale_bits: 10
+  quantization_scale: 1.0e6
+  n_jobs: -1
+  sketch:
+    enabled: true
+    k: 32
+    density: 0.5
+    dp:
+      enabled: false
+      sigma: 0.05
+      delta: 1.0e-05
+    mode: shifted
+    shift_slots: 8
+  authority:
+    min_accept_fraction: 0.5
+    max_client_weight: 0.5
+    require_signatures: true
+    single_decrypt_per_round: true
+    audit_log: true
+trust:
+  engine: anfis
+  n_mf: 5
+  lr: 0.02
+  calib_rounds: 5
+  calib_epochs: 300
+  features:
+  - proj_ref
+  - norm_ratio
+  - peer_agreement
+
+  evidence_alpha: 0.4
+  evidence_z0: 2.0
+  noise_trials: 24
+zero_trust:
+  enabled: true
+  trust_threshold: 0.4
+  history_window: 3
+  ema_alpha: 0.6
+  reject_decay: 0.7
+  max_reject_streak: 3
+  min_accept_fraction: 0.5
+experiments:
+  scenarios:
+  - name: centralized
+    description: Pooled-data reference
+  - name: fedavg
+    description: FedAvg, honest clients only
+    aggregation: fedavg
+    crypto: false
+    trust: false
+    zero_trust: false
+    malicious: false
+  - name: fedavg_attack
+    description: FedAvg under Byzantine attack, no defence
+    aggregation: fedavg
+    crypto: false
+    trust: false
+    zero_trust: false
+    malicious: true
+  - name: fedmedian
+    description: Coordinate-wise median (needs plaintext updates)
+    aggregation: fedmedian
+    malicious: true
+  - name: trimmed_mean
+    description: Trimmed mean (needs plaintext updates)
+    aggregation: trimmed_mean
+    trim_ratio: 0.2
+    malicious: true
+  - name: krum
+    description: Multi-Krum (needs plaintext updates)
+    aggregation: multi_krum
+    malicious: true
+  - name: bulyan
+    description: Bulyan (needs plaintext updates)
+    aggregation: bulyan
+    malicious: true
+  - name: foolsgold
+    description: FoolsGold (needs plaintext updates)
+    aggregation: foolsgold
+    malicious: true
+  - name: he_only
+    description: Packed HE aggregation, no trust gate
+    aggregation: fedavg
+    crypto: true
+    trust: false
+    zero_trust: false
+    malicious: true
+  - name: veritrust
+    description: 'HE-VeriTrust: packed HE + verifiable sketch trust + Zero-Trust gate'
+    aggregation: fedavg
+    crypto: true
+    trust: true
+    zero_trust: true
+    malicious: true
+    trust_engine: anfis
+  - name: veritrust_mamdani
+    description: HE-VeriTrust with the fixed (label-free) trust engine
+    aggregation: fedavg
+    crypto: true
+    trust: true
+    zero_trust: true
+    malicious: true
+    trust_engine: mamdani
+  attack:
+    enabled: true
+    fraction: 0.3
+    type: sign_flip
+    noise_sigma: 1.0
+    epsilon: 2.5
+    perturbation: std
+    forge_attestation: false
+logging:
+  level: INFO
