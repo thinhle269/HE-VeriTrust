@@ -9,17 +9,16 @@ remedies conflict — Byzantine-robust aggregators must *read* the plaintext
 updates that encryption is meant to *hide*.
 
 The usual escape is to let each client send a small plaintext "attestation"
-describing its own update, and to gate aggregation on that. **That escape does
-not work.** An adversary able to craft a poisoned update is equally able to type
+describing its own update, and to gate aggregation on that.   An adversary able to craft a poisoned update is equally able to type
 benign numbers next to it, so the defence ends up scoring evidence supplied by
 the entity it is policing.
 
 HE-VeriTrust removes the client from the evidence path. The robustness signal is
-**measured from the ciphertext** the client actually submitted, using the
+ measured from the ciphertext the client actually submitted, using the
 additive homomorphism itself:
 
 ```
-Π_j E(q_j)^{v_j}  =  E( ⟨q, v⟩ )        for a public probe vector v
+ 
 ```
 
 `k` such probes give a `k`-dimensional sketch of every update, computed without
@@ -43,7 +42,7 @@ so a client must commit to its update *before* the measured subspace exists —
 commit-then-reveal, refreshed every round.
 
 **2. The authority is a verifier, not an oracle.** It verifies every client's
-Ed25519 signature, derives the probes itself, **recomputes** every ciphertext it
+Ed25519 signature, derives the probes itself, recomputes every ciphertext it
 decrypts, enforces a participation floor and a per-client weight cap, and opens
 exactly one aggregate per round. This is what closes the singleton and
 difference attacks — note a `(t, n)` threshold committee alone does *not* close
@@ -87,7 +86,7 @@ statistically unlearnable and depresses macro-F1 for reasons that have nothing
 to do with the detector. Reading the full tree recovers them to ~24.8 k and
 ~13.1 k, taking the imbalance ratio from ~65:1 to ~3:1.
 
-Feature selection and scaler fitting both happen **after** the train/val/test
+Feature selection and scaler fitting both happen after the train/val/test
 split and on the training split only.
 
  
