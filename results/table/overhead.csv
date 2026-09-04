@@ -1,0 +1,6 @@
+scenario,t_train,t_encrypt,t_measure,t_trust,t_aggregate,t_total,upload_MB,total_s_std,crypto_added_s,crypto_added_s_std,slowdown_vs_fedavg,slowdown_min,slowdown_max,repeats,source
+fedavg,9.451,0.0,0.0,0.0,0.006,9.483,2.082,1.393,0.006,0.001,1.0,1.0,1.0,3,dedicated benchmark (uncontended)
+he_only,9.593,9.32,19.231,0.0,0.705,38.872,6.349,0.333,29.256,0.966,4.099,3.511,4.574,3,dedicated benchmark (uncontended)
+krum,9.629,0.0,0.0,0.0,0.01,9.662,2.082,0.509,0.01,0.0,1.019,0.92,1.092,3,dedicated benchmark (uncontended)
+veritrust,8.928,9.544,19.298,0.354,0.595,38.749,6.349,1.117,29.437,1.105,4.086,3.566,4.582,3,dedicated benchmark (uncontended)
+veritrust_mamdani,8.541,9.524,19.235,0.378,0.59,38.293,6.349,1.219,29.349,1.03,4.038,3.569,4.339,3,dedicated benchmark (uncontended)

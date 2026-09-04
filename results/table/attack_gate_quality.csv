@@ -1,0 +1,15 @@
+defence,attack,detection,honest_rejected
+veritrust,alie,0.8333,0.0778
+veritrust,block_evasion,0.9593,0.073
+veritrust,ipm,1.0,0.0889
+veritrust,min_max,0.8444,0.1714
+veritrust,min_sum,0.8333,0.1333
+veritrust,sign_flip_scaled,0.9963,0.0444
+veritrust,unresolvable,0.7815,0.2397
+veritrust_mamdani,alie,0.0,0.0095
+veritrust_mamdani,block_evasion,1.0,0.0143
+veritrust_mamdani,ipm,1.0,0.0095
+veritrust_mamdani,min_max,0.0,0.2635
+veritrust_mamdani,min_sum,0.0,0.273
+veritrust_mamdani,sign_flip_scaled,1.0,0.0127
+veritrust_mamdani,unresolvable,0.4222,0.0111

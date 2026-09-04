@@ -1,0 +1,8 @@
+attack,undefended_macro_f1,clean_ceiling,damage,is_effective_at_this_scale
+ipm,0.0418,0.6971,0.6553,True
+sign_flip_scaled,0.5844,0.6971,0.1127,True
+block_evasion,0.658,0.6971,0.0391,True
+alie,0.6951,0.6971,0.0019,False
+min_max,0.6947,0.6971,0.0024,False
+min_sum,0.6956,0.6971,0.0015,False
+unresolvable,0.6926,0.6971,0.0045,False

@@ -1,0 +1,11 @@
+scenario,malicious_rejected_rate,honest_rejected_rate,honest_rejected_per_round
+bulyan,0.0,0.0,0.0
+fedavg,0.0,0.0,0.0
+fedavg_attack,0.0,0.0,0.0
+fedmedian,0.0,0.0,0.0
+foolsgold,0.0,0.0,0.0
+he_only,0.0,0.0,0.0
+krum,0.0,0.0,0.0
+trimmed_mean,0.0,0.0,0.0
+veritrust,1.0,0.0,0.0
+veritrust_mamdani,1.0,0.0,0.0
