@@ -1,0 +1,161 @@
+<mxfile host="Electron">
+  <diagram name="Page-1" id="vSRG6kqEwMli6PNGF7Q1">
+    <mxGraphModel dx="774" dy="524" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECF2FF;strokeColor=#6c8ebf;fillStyle=solid;gradientColor=none;dashed=1;dashPattern=8 8;" value="&lt;b&gt;Federated Clients&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="280" width="200" x="5" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" value="1. Receive round state" vertex="1">
+          <mxGeometry height="30" width="170" x="20" y="133" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" value="2. Local update preparation" vertex="1">
+          <mxGeometry height="30" width="170" x="20" y="196" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" value="3. Summit signed ciphertext bundle" vertex="1">
+          <mxGeometry height="30" width="170" x="20" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;fontStyle=1" value="Next round" vertex="1">
+          <mxGeometry height="30" width="170" x="20" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2FFF2;strokeColor=#82b366;fillStyle=auto;dashed=1;dashPattern=8 8;" value="&lt;div&gt;&lt;b&gt;Aggregation Server (AS)&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="280" width="240" x="250" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;strokeColor=#A6CB94;strokeWidth=2;fontStyle=1" value="4. Freeze submission transcript&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="200" x="270" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;strokeColor=#A6CB94;strokeWidth=2;fontStyle=1" value="6. Trust evidence&amp;nbsp; processing" vertex="1">
+          <mxGeometry height="30" width="200" x="270" y="219" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;strokeColor=#A6CB94;strokeWidth=2;fontStyle=1" value="8. Apply aggregate and continue" vertex="1">
+          <mxGeometry height="30" width="200" x="270" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9F1;strokeColor=#d79b00;fillStyle=auto;dashed=1;dashPattern=8 8;" value="&lt;div&gt;&lt;b&gt;Decryption Authority (DA)&amp;nbsp;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="280" width="200" x="542" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;strokeColor=#FFB570;strokeWidth=2;fontStyle=1" value="5. Commit-then-reveal verification" vertex="1">
+          <mxGeometry height="30" width="160" x="562" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-21" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;strokeColor=#FFB570;strokeWidth=2;fontStyle=1" value="Cyphertext-drived sketch" vertex="1">
+          <mxGeometry height="30" width="160" x="562" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;strokeColor=#FFB570;strokeWidth=2;fontStyle=1" value="7. Policy-checked aggregate opening" vertex="1">
+          <mxGeometry height="30" width="160" x="562" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-24" edge="1" parent="1" source="xWzS_J90Zt3glKjcHe3c-5" style="endArrow=blockThin;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.955;entryY=0.033;entryDx=0;entryDy=0;entryPerimeter=0;curved=0;strokeColor=#87B1EE;endFill=1;strokeWidth=2;fillColor=#dae8fc;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="275" />
+              <mxPoint x="210" y="190" />
+              <mxPoint x="300" y="190" />
+              <mxPoint x="370.7" y="190" />
+            </Array>
+            <mxPoint x="370" y="290" as="sourcePoint" />
+            <mxPoint x="370.70000000000005" y="167.99" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-27" edge="1" parent="1" source="xWzS_J90Zt3glKjcHe3c-22" style="endArrow=blockThin;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=1;fillColor=#fff2cc;strokeColor=#d6b656;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="550" y="344.5" as="sourcePoint" />
+            <mxPoint x="470" y="345" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-28" edge="1" parent="1" style="endArrow=blockThin;html=1;rounded=1;curved=0;strokeColor=#82b366;endFill=1;strokeWidth=2;fillColor=#d5e8d4;entryX=0.55;entryY=-0.022;entryDx=0;entryDy=0;entryPerimeter=0;" target="xWzS_J90Zt3glKjcHe3c-22" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="280" />
+              <mxPoint x="650" y="280" />
+            </Array>
+            <mxPoint x="350" y="250" as="sourcePoint" />
+            <mxPoint x="630" y="331" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-31" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=1" value="&lt;font&gt;committed cyphertext set&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="103" x="464" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-34" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=1" value="&lt;font&gt;opened sketches s&lt;sub&gt;i&lt;/sub&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="140" x="441" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-36" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=1" value="aggregate delta(w&lt;sup&gt;r&lt;/sup&gt;) only" vertex="1">
+          <mxGeometry height="30" width="140" x="451.5" y="348" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-38" edge="1" parent="1" source="xWzS_J90Zt3glKjcHe3c-34" style="endArrow=blockThin;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=1;fillColor=#fff2cc;strokeColor=#d6b656;exitX=0.864;exitY=-0.044;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="550" y="238" as="sourcePoint" />
+            <mxPoint x="470" y="238.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-39" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=1" value="&lt;span&gt;broadcast w&lt;sup&gt;r+1&amp;nbsp;&lt;/sup&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="140" x="164" y="339" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-40" edge="1" parent="1" source="xWzS_J90Zt3glKjcHe3c-17" style="endArrow=blockThin;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=1;fillColor=#d0cee2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#56517e;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="282" y="345" as="sourcePoint" />
+            <mxPoint x="190" y="344.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-46" edge="1" parent="1" style="endArrow=blockThin;html=1;rounded=0;strokeWidth=5;endFill=1;fillColor=#ECF2FC;gradientColor=#7ea6e0;strokeColor=#84A8E6;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="40" y="468" as="sourcePoint" />
+            <mxPoint x="90" y="468" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-47" edge="1" parent="1" style="endArrow=blockThin;html=1;rounded=0;strokeWidth=5;endFill=1;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#B9E0A5;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="214" y="468" as="sourcePoint" />
+            <mxPoint x="264" y="468" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-48" edge="1" parent="1" style="endArrow=blockThin;html=1;rounded=0;strokeWidth=5;endFill=1;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#FFB570;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="384" y="468" as="sourcePoint" />
+            <mxPoint x="434" y="468" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-50" edge="1" parent="1" style="endArrow=blockThin;html=1;rounded=0;strokeWidth=5;endFill=1;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#A680B8;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="562" y="468" as="sourcePoint" />
+            <mxPoint x="612" y="468" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-51" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=0" value="encrypted update/ ciphertext path" vertex="1">
+          <mxGeometry height="30" width="110" x="80" y="451" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-52" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=0" value="Trust decision/ policy control" vertex="1">
+          <mxGeometry height="30" width="80" x="270" y="451" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-53" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=0" value="DA&amp;nbsp; verification/ opened quantity" vertex="1">
+          <mxGeometry height="30" width="80" x="440" y="451" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-54" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=0" value="Global-model broadcast" vertex="1">
+          <mxGeometry height="30" width="80" x="608" y="451" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-55" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=1" value="A&lt;sub&gt;t&lt;/sub&gt;, integer weights w&lt;sub&gt;i&lt;/sub&gt;" vertex="1">
+          <mxGeometry height="30" width="140" x="524" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-56" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=1" value="&lt;font&gt;signed encrypted updates&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="140" x="220" y="163" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-59" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" value="&amp;nbsp;&lt;span style=&quot;text-indent: -94.5333px;&quot;&gt;AS never holds sk or sees an individual plaintext update. DA is non-colluding and opens only verifier-constructed sketches plus one policy-admissible aggregate per round&lt;/span&gt;" vertex="1">
+          <mxGeometry height="43" width="342" x="220" y="408" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-60" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=10;fontStyle=0" value="&lt;b style=&quot;text-indent: -94.5333px;&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;Security boundary&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="110" x="320.5" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-61" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontSize=15;fontStyle=1" value="&lt;p class=&quot;MsoNormal&quot;&gt;Overall Architecture and One-Round Workflow of HE-VeriTrust&lt;/p&gt;" vertex="1">
+          <mxGeometry height="30" width="459" x="149" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="xWzS_J90Zt3glKjcHe3c-62" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#FFFFFF;" value="&lt;span style=&quot;line-height: 107%; font-family: Calibri, sans-serif;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Encrypted&amp;nbsp;model updates remain hidden from the aggregation server, trust evidence is&amp;nbsp;derived from the submitted ciphertext by a non-colluding decryption authority&lt;/font&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="520" x="128" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="do_VCSVrcWhbN_Fic--t-1" edge="1" parent="1" style="endArrow=blockThin;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=1;fillColor=#fff2cc;strokeColor=#87B1EE;exitX=0.864;exitY=-0.044;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="470" y="152.5" as="sourcePoint" />
+            <mxPoint x="562" y="153" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,120 @@
+<mxfile host="app.diagrams.net" modified="2026-08-23T12:00:00.000Z" agent="OpenAI" version="24.7.17" type="device">
+  <diagram id="he-veritrust-arch" name="Overall Architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="&lt;font style=&quot;font-size:28px;&quot;&gt;&lt;b&gt;Overall Architecture and One-Round Workflow of HE-VeriTrust&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="1320" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="&lt;font style=&quot;font-size:16px;color:#444444;&quot;&gt;Encrypted model updates remain hidden from the aggregation server; trust evidence is derived from the submitted ciphertext by a non-colluding decryption authority.&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="210" y="65" width="1500" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Domain containers -->
+        <mxCell id="clientsDomain" value="&lt;font style=&quot;font-size:22px;&quot;&gt;&lt;b&gt;Federated Clients&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;strokeColor=#2D6FBC;fillColor=#F8FBFF;align=center;verticalAlign=top;spacingTop=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="110" width="450" height="760" as="geometry"/>
+        </mxCell>
+        <mxCell id="asDomain" value="&lt;font style=&quot;font-size:22px;&quot;&gt;&lt;b&gt;Aggregation Server (AS)&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;strokeColor=#2E8B57;fillColor=#F7FCF9;align=center;verticalAlign=top;spacingTop=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="110" width="700" height="760" as="geometry"/>
+        </mxCell>
+        <mxCell id="daDomain" value="&lt;font style=&quot;font-size:22px;&quot;&gt;&lt;b&gt;Decryption Authority (DA)&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;strokeWidth=3;strokeColor=#D4741F;fillColor=#FFFAF5;align=center;verticalAlign=top;spacingTop=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="110" width="550" height="760" as="geometry"/>
+        </mxCell>
+
+        <!-- Client boxes -->
+        <mxCell id="c1" value="&lt;b&gt;1. Receive round state&lt;/b&gt;&lt;br/&gt;Global model w&lt;sup&gt;r&lt;/sup&gt;, round r, public key pk&lt;br/&gt;Authenticated broadcast; no standing trust" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6CA0DC;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="90" y="190" width="360" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="c2" value="&lt;b&gt;2. Local update preparation&lt;/b&gt;&lt;br/&gt;Train locally → Δw&lt;sub&gt;i&lt;/sub&gt;&lt;br/&gt;Honest path: norm/gradient safeguards&lt;br/&gt;Quantize + pack (42 usable slots)&lt;br/&gt;Paillier encrypt + Ed25519 sign" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6CA0DC;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="90" y="330" width="360" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="c3" value="&lt;b&gt;3. Submit signed ciphertext bundle&lt;/b&gt;&lt;br/&gt;E(q&lt;sub&gt;i&lt;/sub&gt;), client ID, round ID, signature&lt;br/&gt;No client-reported trust statistics" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6CA0DC;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="90" y="530" width="360" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c4" value="&lt;b&gt;Next round&lt;/b&gt;&lt;br/&gt;Receive updated model w&lt;sup&gt;r+1&lt;/sup&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6CA0DC;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="90" y="690" width="360" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- AS boxes -->
+        <mxCell id="a4" value="&lt;b&gt;4. Freeze submission transcript&lt;/b&gt;&lt;br/&gt;Collect signed ciphertexts; finalize client set for round r" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#69B38D;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="600" y="190" width="580" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="a6" value="&lt;b&gt;6. Trust evidence processing&lt;/b&gt;&lt;br/&gt;Receive sketches s&lt;sub&gt;i&lt;/sub&gt; returned by DA&lt;br/&gt;Compute: proj_ref, norm_ratio, peer_agreement&lt;br/&gt;Evidence EMA + resolvability normalization (z&lt;sub&gt;0&lt;/sub&gt;)&lt;br/&gt;Fixed label-free fuzzy score t&lt;sub&gt;i&lt;/sub&gt; ∈ [0,1]&lt;br/&gt;Zero-Trust gate → accepted set A&lt;sub&gt;r&lt;/sub&gt; + integer weights ω&lt;sub&gt;i&lt;/sub&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#69B38D;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="600" y="360" width="580" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="a8" value="&lt;b&gt;8. Apply aggregate and continue&lt;/b&gt;&lt;br/&gt;Receive decoded aggregate Δw&lt;sup&gt;r&lt;/sup&gt; from DA&lt;br/&gt;w&lt;sup&gt;r+1&lt;/sup&gt; = w&lt;sup&gt;r&lt;/sup&gt; + Δw&lt;sup&gt;r&lt;/sup&gt;; broadcast to clients" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#69B38D;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="600" y="650" width="580" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- DA boxes -->
+        <mxCell id="d5" value="&lt;b&gt;5. Commit-then-reveal verification&lt;/b&gt;&lt;br/&gt;Verify signatures, enrollment, round, ciphertext range&lt;br/&gt;Compute transcript root; draw nonce after commitment&lt;br/&gt;Probe seed = H(r || root || nonce)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#E3A06A;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="190" width="430" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="d6" value="&lt;b&gt;Ciphertext-derived sketch&lt;/b&gt;&lt;br/&gt;Homomorphic slot shifts + k random probes&lt;br/&gt;DA constructs every probe ciphertext it decrypts&lt;br/&gt;Open sketches only; never open Δw&lt;sub&gt;i&lt;/sub&gt;&lt;br/&gt;Post-commitment shifts close packing null space" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#E3A06A;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="385" width="430" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="d7" value="&lt;b&gt;7. Policy-checked aggregate opening&lt;/b&gt;&lt;br/&gt;Validate A&lt;sub&gt;r&lt;/sub&gt; and ω&lt;sub&gt;i&lt;/sub&gt;: participation floor, weight cap&lt;br/&gt;One opening/round, monotone round, no-carry bounds&lt;br/&gt;Construct weighted encrypted aggregate from stored ciphertexts&lt;br/&gt;Decrypt aggregate only → Δw&lt;sup&gt;r&lt;/sup&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#E3A06A;fillColor=#FFFFFF;strokeWidth=2;fontSize=14;spacing=8;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="610" width="430" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- Security boundary -->
+        <mxCell id="secTitle" value="&lt;b&gt;Security boundary&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="825" width="280" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="secText" value="AS never holds sk or sees an individual plaintext update. DA is non-colluding and opens only verifier-constructed sketches plus one policy-admissible aggregate per round." style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#B5B5B5;fillColor=#FFFFFF;strokeWidth=1.5;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="630" y="850" width="920" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="leg1a" value="" style="shape=mxgraph.arrows2.arrow;html=1;fillColor=#2D6FBC;strokeColor=#2D6FBC;" vertex="1" parent="1">
+          <mxGeometry x="90" y="935" width="70" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg1b" value="Encrypted update / ciphertext path" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="170" y="933" width="260" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2a" value="" style="shape=mxgraph.arrows2.arrow;html=1;fillColor=#2E8B57;strokeColor=#2E8B57;" vertex="1" parent="1">
+          <mxGeometry x="540" y="935" width="70" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2b" value="Trust decision / policy control" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="620" y="933" width="260" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg3a" value="" style="shape=mxgraph.arrows2.arrow;html=1;fillColor=#D4741F;strokeColor=#D4741F;" vertex="1" parent="1">
+          <mxGeometry x="960" y="935" width="70" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg3b" value="DA verification / opened quantity" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="933" width="300" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg4a" value="" style="shape=mxgraph.arrows2.arrow;html=1;fillColor=#6C7178;strokeColor=#6C7178;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="935" width="70" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg4b" value="Global-model broadcast" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="933" width="220" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e_c3_a4" value="signed encrypted updates" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2D6FBC;strokeWidth=3;endArrow=block;endFill=1;fontSize=14;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="c3" target="a4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="590" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_a4_d5" value="committed ciphertext set" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2D6FBC;strokeWidth=3;endArrow=block;endFill=1;fontSize=14;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="a4" target="d5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_d6_a6" value="opened sketches s&lt;sub&gt;i&lt;/sub&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4741F;strokeWidth=3;endArrow=block;endFill=1;fontSize=14;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d6" target="a6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_a6_d7" value="A&lt;sub&gt;r&lt;/sub&gt;, integer weights ω&lt;sub&gt;i&lt;/sub&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E8B57;strokeWidth=3;endArrow=block;endFill=1;fontSize=14;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="a6" target="d7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_d7_a8" value="aggregate Δw&lt;sup&gt;r&lt;/sup&gt; only" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#D4741F;strokeWidth=3;endArrow=block;endFill=1;fontSize=14;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="d7" target="a8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_a8_c4" value="broadcast w&lt;sup&gt;r+1&lt;/sup&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6C7178;strokeWidth=3;endArrow=block;endFill=1;fontSize=14;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="a8" target="c4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
