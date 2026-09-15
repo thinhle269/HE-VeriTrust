@@ -1,0 +1,274 @@
+# =====================================================================
+# HE-VeriTrust - CIC-IoT-2023 configuration
+# =====================================================================
+seed: 42
+seeds: [42, 123, 2024, 7, 2025]
+device: auto
+
+paths:
+  results_dir: "results/cic_iot"
+  csv_dir: "results/cic_iot/csv"
+  figures_dir: "results/cic_iot/figures"
+  models_dir: "results/cic_iot/models"
+  logs_dir: "results/cic_iot/logs"
+
+data:
+  name: "cic_iot"
+  source: "cic_tree"
+  # Per-attack-type directory tree of the official CIC-IoT-2023 release.
+  csv_root: "D:/Chi Van/CIC_IoT_Attack_2023/CSV"
+  processed_dir: "data/processed_cic"
+  # Rows read per attack-TYPE directory.  Rare types have fewer rows than the
+  # cap and are therefore taken in full - this is what recovers the Web and
+  # BruteForce families that the pre-merged sample files decimate.
+  per_type_cap: 60000
+  # Cap per SUPER-CLASS after grouping.  40k against ~24.8k (Web) and ~13.1k
+  # (BruteForce) leaves an imbalance ratio of ~3:1 instead of ~65:1.
+  max_rows_per_class: 40000
+  test_size: 0.15
+  val_size: 0.15
+  scaler: "standard"
+  drop_correlated_threshold: 0.98
+
+model:
+  type: "mlp"
+  hidden_sizes: [256, 128, 64]      # 51k params - affordable thanks to slot packing
+  dropout: 0.2
+  activation: "relu"
+
+training:
+  # Class-imbalance handling.  ``none`` reproduces the v1 behaviour;
+  # ``effective_number`` uses Cui et al. (2019) re-weighting.
+  class_weighting: "effective_number"   # none | inverse | effective_number
+  cb_beta: 0.9999
+  balanced_sampler: true                # per-client WeightedRandomSampler
+  label_smoothing: 0.02
+
+federated:
+  num_clients: 10
+  rounds: 30
+  local_epochs: 2
+  local_batch_size: 256
+  client_lr: 0.002
+  optimizer: "adam"
+  partition: "dirichlet"
+  dirichlet_alpha: 0.5
+  fraction_fit: 1.0
+  grad_clip_norm: 1.0
+  # ``max_update_norm`` (C) is the Byzantine magnitude bound, and it is chosen
+  # from a measurement rather than by convention.  Honest updates on this task
+  # have ||dw|| ~ 4.7 (median over clients and rounds; 3.1 - 9.6 range).  A
+  # colluding minority reverses the sign of the aggregate exactly when
+  # f*C > (N-f)*||dw||_honest, i.e. when C > (7 * 4.7)/3 = 10.9.  Setting
+  # C = 10 sits just inside that boundary: honest clients are essentially never
+  # clipped, while the strongest admissible attack (sign_flip_scaled, which
+  # spends the whole budget) can cripple the step but cannot invert it.
+  # Re-measure this if the model, optimiser or client count changes - the bound
+  # is only meaningful relative to the honest update scale.
+  max_update_norm: 10.0
+
+model_selection:
+  enabled: true
+  metric: "macro_f1"
+
+# ---------------------------------------------------------------------
+# Cryptographic layer
+# ---------------------------------------------------------------------
+crypto:
+  enabled: true
+  backend: "paillier_packed"      # paillier_packed | paillier_naive | none
+  key_size: 2048                  # production-grade; 1024 only for smoke tests
+  # ---- fixed-point / slot packing ----
+  value_bits: 20                  # signed magnitude resolution per coordinate
+  headroom_bits: 20               # room for sum_i round(S_lambda * lambda_i) * q
+  weight_scale_bits: 10           # S_lambda = 2^10 for quantised trust weights
+  quantization_scale: 1.0e6       # S: real -> integer fixed point
+  n_jobs: -1
+
+  # ---- verifiable attestation sketch (Section 3.3 of docs/DESIGN.md) ----
+  sketch:
+    enabled: true
+    # k = number of random probes.  This is the privacy<->robustness dial:
+    #   k = 0  -> nothing revealed about individual updates, no robustness
+    #   k = d  -> full plaintext exposure, full robustness
+    # k must satisfy k << d for the linear system to stay underdetermined.
+    k: 32
+    # Probe density: fraction of packing blocks included in each probe
+    # (sparse Rademacher / Achlioptas-style projection).
+    density: 0.5
+    # Probe geometry.
+    #   block   - one coefficient per packing block.  Cheaper, but every such
+    #             probe reads only block *sums*, and the resulting within-block
+    #             null space is shared by all of them: an adversary that
+    #             reverses its update while preserving each block sum produces a
+    #             numerically identical sketch (measured cosine +0.999986) and
+    #             the gate goes blind.  Commit-then-reveal does not help here,
+    #             because the attacker never needs to know which probes were
+    #             drawn.  See src/federated/attacks.py::block_evasion.
+    #   shifted - the authority shifts each block by a per-round delta_b AFTER
+    #             the clients have signed, then reads one individual field, so
+    #             each probe samples one coordinate per block at a position
+    #             fixed only after commitment.  Costs shift_slots reserved slots
+    #             (50 -> 42, +19% upload) and one exponentiation per block.
+    mode: "shifted"                 # shifted | block
+    shift_slots: 8
+    # Differential privacy on the released sketch (Gaussian mechanism).
+    #
+    # DEFAULT OFF, and the reason is a measured one rather than a preference.
+    # The sketch of an honest update has ||s|| ~ sqrt(k)*||dw||/sqrt(d); at the
+    # measured honest ||dw|| ~ 4.7 and d = 52040 that is ~0.12.  The Gaussian
+    # mechanism's noise is sqrt(k)*sigma*||V||_2*C, which at sigma = 0.05 and
+    # C = 10 is ~3.3 - i.e. 28x the signal, so the trust features become pure
+    # noise and the gate degenerates to random rejection.  Restoring SNR ~ 1
+    # would need sigma ~ 0.0018, giving eps ~ 2700 per round: a number with no
+    # privacy meaning.  Per-round, per-client DP over a random projection of a
+    # 5e4-dimensional update simply cannot buy both utility and a credible
+    # epsilon at N = 10 clients; amplification by subsampling needs far more
+    # participants than a cross-silo IDS federation has.
+    #
+    # The privacy argument therefore rests on underdetermination (k << d) and
+    # encryption, measured directly in scripts/run_privacy_eval.py with the
+    # optimal linear reconstruction.  Turning DP on is supported, and the
+    # dp_sigma ablation reports the utility/epsilon trade-off explicitly -
+    # including that it is unfavourable here.  Reporting that honestly is worth
+    # more than a formal guarantee whose epsilon carries no information.
+    dp:
+      enabled: false
+      sigma: 0.05                 # noise multiplier, relative to sensitivity
+      delta: 1.0e-5
+
+  # ---- decryption-authority policy (Section 4 of docs/DESIGN.md) ----
+  authority:
+    min_accept_fraction: 0.5      # refuse to open an aggregate over < ceil(f*N)
+    max_client_weight: 0.5        # refuse a near-singleton weight vector
+    require_signatures: true      # every ciphertext must carry a client Ed25519 sig
+    single_decrypt_per_round: true  # blocks the two-query difference attack
+    audit_log: true
+
+# ---------------------------------------------------------------------
+# Trust engine - consumes SERVER-DERIVED sketch features only.
+# ---------------------------------------------------------------------
+trust:
+  engine: "anfis"                 # anfis | mamdani | none
+  n_mf: 5
+  lr: 0.02
+  calib_rounds: 5
+  calib_epochs: 300
+  features: ["proj_ref", "norm_ratio", "peer_agreement"]
+  # Evidence handling.  A sketch cosine is an estimate with std ~0.03 for this
+  # operator, which is the same size as the honest signal once the model has
+  # converged; these two keys are what stop that noise from being amplified
+  # into a confident verdict.  See src/trust/normalise.py.
+  evidence_alpha: 0.4      # EMA on the FEATURES (averages ~4 rounds, halves sigma)
+  evidence_z0: 2.0         # |z| at which alignment counts as resolved (~95%)
+  noise_trials: 24         # Monte-Carlo draws used to measure sigma, once per run
+
+zero_trust:
+  enabled: true
+  trust_threshold: 0.40
+  history_window: 3
+  ema_alpha: 0.6
+  reject_decay: 0.7
+  max_reject_streak: 3
+  min_accept_fraction: 0.5
+
+# ---------------------------------------------------------------------
+experiments:
+  scenarios:
+    - name: "centralized"
+      description: "Pooled-data reference"
+    - name: "fedavg"
+      description: "FedAvg, honest clients only"
+      aggregation: "fedavg"
+      crypto: false
+      trust: false
+      zero_trust: false
+      malicious: false
+    - name: "fedavg_attack"
+      description: "FedAvg under Byzantine attack, no defence"
+      aggregation: "fedavg"
+      crypto: false
+      trust: false
+      zero_trust: false
+      malicious: true
+    - name: "fedmedian"
+      description: "Coordinate-wise median (needs plaintext updates)"
+      aggregation: "fedmedian"
+      malicious: true
+    - name: "trimmed_mean"
+      description: "Trimmed mean (needs plaintext updates)"
+      aggregation: "trimmed_mean"
+      trim_ratio: 0.2
+      malicious: true
+    - name: "krum"
+      description: "Multi-Krum (needs plaintext updates)"
+      aggregation: "multi_krum"
+      malicious: true
+    - name: "bulyan"
+      description: "Bulyan (needs plaintext updates)"
+      aggregation: "bulyan"
+      malicious: true
+    - name: "foolsgold"
+      description: "FoolsGold (needs plaintext updates)"
+      aggregation: "foolsgold"
+      malicious: true
+    - name: "he_only"
+      description: "Packed HE aggregation, no trust gate"
+      aggregation: "fedavg"
+      crypto: true
+      trust: false
+      zero_trust: false
+      malicious: true
+    - name: "veritrust"
+      description: "HE-VeriTrust: packed HE + verifiable sketch trust + Zero-Trust gate"
+      aggregation: "fedavg"
+      crypto: true
+      trust: true
+      trust_engine: "anfis"
+      zero_trust: true
+      malicious: true
+
+    # Same protocol, fixed-shape trust engine.  The learned ANFIS is calibrated
+    # on attestations labelled benign/malicious, which in simulation come from
+    # the injected ground truth - a reviewer is right to ask whether the gate is
+    # then circular.  This variant needs NO labels at all: its membership
+    # functions are hand-specified, so its rejection decisions depend only on
+    # the measured sketch.  Reporting both separates the two claims - the
+    # learned engine removes hand-tuning, the fixed engine removes the label
+    # requirement - instead of leaving the reader to wonder which is doing the
+    # work.
+    - name: "veritrust_mamdani"
+      description: "HE-VeriTrust with the fixed (label-free) trust engine"
+      aggregation: "fedavg"
+      crypto: true
+      trust: true
+      trust_engine: "mamdani"
+      zero_trust: true
+      malicious: true
+
+  attack:
+    enabled: true
+    fraction: 0.30
+    type: "sign_flip"
+    noise_sigma: 1.0
+    # IPM strength.  Xie et al.'s attack sets the malicious update to
+    # -epsilon * mean(benign); the aggregate's inner product with the true
+    # descent direction flips sign only when f*epsilon > N-f, i.e. when
+    # epsilon > (N-f)/f = 7/3 = 2.33 at this Byzantine fraction.  The
+    # conventional 0.5 is therefore below the attack's own threshold and
+    # leaves the undefended baseline essentially unharmed - measured cosine
+    # 0.998 at epsilon=0.5 versus -0.70 at epsilon=2.5 - which would make the
+    # IPM column report that no defence is needed.  2.5 sits just past the
+    # threshold, so the attack does what its paper claims.
+    epsilon: 2.5
+    perturbation: "std"
+    # Adaptive adversary switches (see src/federated/attacks.py):
+    #   forge_attestation - client reports a benign-looking attestation while
+    #                       submitting a poisoned update.  Under v1's
+    #                       self-reported attestation this defeats the defence
+    #                       outright; under the server-derived sketch it is a
+    #                       no-op.  Kept as an explicit, testable scenario.
+    forge_attestation: false
+
+logging:
+  level: "INFO"
