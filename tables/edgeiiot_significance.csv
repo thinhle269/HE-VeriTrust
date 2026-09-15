@@ -1,0 +1,11 @@
+reference,vs,metric,n_seeds,ref_mean,other_mean,mean_diff,wins,ttest_p,wilcoxon_p,cohens_dz,holm_p,significant_holm_05
+veritrust_mamdani,he_only,test_macro_f1,5,0.7448,0.6635,0.0813,5,0.0017,0.0625,3.357,0.0119,True
+veritrust_mamdani,fedavg_attack,test_macro_f1,5,0.7448,0.6679,0.0769,5,0.002,0.0625,3.221,0.0119,True
+veritrust_mamdani,foolsgold,test_macro_f1,5,0.7448,0.6704,0.0744,5,0.0021,0.0625,3.177,0.0119,True
+veritrust_mamdani,trimmed_mean,test_macro_f1,5,0.7448,0.6846,0.0603,5,0.0018,0.0625,3.283,0.0119,True
+veritrust_mamdani,fedmedian,test_macro_f1,5,0.7448,0.6899,0.055,5,0.006,0.0625,2.381,0.018,True
+veritrust_mamdani,bulyan,test_macro_f1,5,0.7448,0.6945,0.0504,5,0.0322,0.0625,1.441,0.035,True
+veritrust_mamdani,krum,test_macro_f1,5,0.7448,0.7144,0.0305,5,0.0175,0.0625,1.746,0.035,True
+veritrust_mamdani,veritrust,test_macro_f1,5,0.7448,0.746,-0.0012,3,0.5778,1.0,-0.271,,False
+veritrust_mamdani,fedavg,test_macro_f1,5,0.7448,0.7509,-0.0061,2,0.4386,0.625,-0.384,,False
+veritrust_mamdani,centralized,test_macro_f1,5,0.7448,0.8112,-0.0663,0,0.0029,0.0625,-2.906,,False

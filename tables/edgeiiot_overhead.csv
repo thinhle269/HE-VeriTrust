@@ -1,0 +1,11 @@
+scenario,t_train,t_encrypt,t_measure,t_trust,t_aggregate,t_total,upload_MB,slowdown_vs_fedavg,source
+bulyan,2.073,0.0,0.0,0.0,0.013,2.112,2.018,1.021,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
+fedavg,2.037,0.0,0.0,0.0,0.004,2.067,2.018,1.0,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
+fedavg_attack,2.054,0.0,0.0,0.0,0.004,2.085,2.018,1.009,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
+fedmedian,2.067,0.0,0.0,0.0,0.013,2.107,2.018,1.019,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
+foolsgold,2.056,0.0,0.0,0.0,0.009,2.092,2.018,1.012,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
+he_only,1.386,43.319,39.386,0.0,2.414,86.531,6.154,41.857,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
+krum,2.072,0.0,0.0,0.0,0.008,2.107,2.018,1.019,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
+trimmed_mean,2.072,0.0,0.0,0.0,0.009,2.107,2.018,1.019,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
+veritrust,1.407,39.966,41.764,0.819,2.133,86.117,6.154,41.657,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
+veritrust_mamdani,1.388,38.376,42.851,0.269,2.136,85.048,6.154,41.14,"STUDY TIMINGS - CONTENDED, do not cite; run scripts/benchmark_overhead.py"
